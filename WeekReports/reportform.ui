@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ReportForm</class>
+ <widget class="QWidget" name="ReportForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>714</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>报表</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
+     </property>
+     <property name="topMargin">
+      <number>20</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab1">
+        <attribute name="title">
+         <string>  A</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <layout class="QGridLayout" name="gridLayout1">
+           <item row="1" column="0">
+            <widget class="QLabel" name="station2">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="station1">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="station3">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab2">
+        <attribute name="title">
+         <string>B</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QGridLayout" name="gridLayout2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="station4">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="station5">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="station6">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab3">
+        <attribute name="title">
+         <string>C</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QGridLayout" name="gridLayout3">
+           <item row="1" column="0">
+            <widget class="QLabel" name="station8">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="station7">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="station9">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <spacer name="horizontalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="moveCAD">
+         <property name="text">
+          <string>移动CAD</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="restoreCAD">
+         <property name="text">
+          <string>还原CAD</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="miningAreaBox"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QAxWidget" name="axWidget">
+         <property name="control" stdset="0">
+          <string>{74a777f8-7a8f-4e7c-af47-7074828086e2}</string>
+         </property>
+         <property name="minimumSize" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize" stdset="0">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="DynToolTip" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="EditGripPoint" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="EnableDeleteKey" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="EnableDrawOrder" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="EnableIntelliSelect" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="EnableMouseMoveView" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="IsDrawCoord" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="ShowCommandWindow" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="ShowModelBar" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="ShowStatusBar" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="ShowToolBars" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="ViewColor" stdset="0">
+          <color>
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </property>
+         <property name="Watermark" stdset="0">
+          <string>辽宁大学</string>
+         </property>
+         <property name="sizePolicy" stdset="0">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>待读取文件表列，选中点击读取</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="readCSVInList">
+         <property name="text">
+          <string>读取</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QTableWidget" name="csvList"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="displayCapturedImage">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>手动截图效果在此显示</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="startTimeLabel">
+         <property name="text">
+          <string>起始：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="startDate">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2021</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="date">
+          <date>
+           <year>2021</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="endTimeLabel">
+         <property name="text">
+          <string>结束：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="endDate">
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2021</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="date">
+          <date>
+           <year>2021</year>
+           <month>1</month>
+           <day>1</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clearTwinkeButton">
+         <property name="text">
+          <string>清空标记</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="queryButton">
+         <property name="text">
+          <string>查询</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="captureByManual">
+         <property name="text">
+          <string>手动截图</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="saveCapturedImageByManual">
+         <property name="text">
+          <string>保存手动截图</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="captureByRobot">
+         <property name="text">
+          <string>自动截图</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="generateWebDOC">
+         <property name="text">
+          <string>生成 doc</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="statusLabel">
+         <property name="text">
+          <string>状态：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="statusOfProgramme">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QAxWidget</class>
+   <extends>QWidget</extends>
+   <header>qaxwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
