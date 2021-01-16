@@ -4,5 +4,6 @@
 	"Port":"3306",
 	"DatabaseName":"ks",
 	"UserName":"root",
-	"Password":"071139"
+	"Password":"071139",
+	"Table":"mine_quack_results"
 }
