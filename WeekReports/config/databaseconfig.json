@@ -1,0 +1,8 @@
+{
+    "Driver": "QMYSQL",
+    "HostName": "127.0.0.1",
+	"Port":"3306",
+	"DatabaseName":"ks",
+	"UserName":"root",
+	"Password":"071139"
+}

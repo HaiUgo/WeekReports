@@ -26,6 +26,7 @@
 #include "connectdatabase.h"
 #include "capturescreen.h"
 #include "miningareamap.h"
+#include "miningarealocation.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,6 +49,7 @@ private:
 
     QMap<QString,QString> miningAreaMap;
     QString miningAreaValue;
+    QMap<QString,QString> miningAreaLocation;
 
     QString startDate;
     QString endDate;

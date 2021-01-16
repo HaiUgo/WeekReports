@@ -1,0 +1,26 @@
+{
+    "hongyang": {
+	"R" : "Li Da Ren Jia",
+    "S" : "Hao Zi Tun",
+    "T" : "Yang Dian Zi",
+    "U" : "Shu Bei Zi",
+    "V" : "Nan Feng Jing",
+    "W" : "Bei Qing Dui Zi",
+    "X" : "Kuang Shang Che Dui",
+    "Y" : "Huo Yao Ku",
+    "Z" : "Gong Ye Guang Chang",
+    "Undefined" : "Unknown"
+	},
+    "pingdingshan": {
+	"U":"Da Zuan Gong Qu",
+	"V":"Wang Jia Cun",
+	"W":"Xi Feng Jing",
+	"X":"Lao Ban Gong Lou",
+	"Y":"Xiang Shan Kuang",
+	"Z":"Niu Jia Cun",
+	"Undefined":"Unknown"
+	},
+	"shuangyashan":{
+	"Undefined":"Unknown"
+	}
+}

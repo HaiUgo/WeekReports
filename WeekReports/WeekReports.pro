@@ -6,7 +6,7 @@ QT += printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
-
+RC_ICONS = mmq.ico
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -25,6 +25,7 @@ SOURCES += \
     connectdatabase.cpp \
     databaseconfigure.cpp \
     main.cpp \
+    miningarealocation.cpp \
     miningareamap.cpp \
     reportform.cpp \
     widget.cpp
@@ -35,6 +36,7 @@ HEADERS += \
     chartview.h \
     connectdatabase.h \
     databaseconfigure.h \
+    miningarealocation.h \
     miningareamap.h \
     reportform.h \
     widget.h
@@ -47,3 +49,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images.qrc

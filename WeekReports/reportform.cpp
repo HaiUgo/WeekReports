@@ -20,6 +20,8 @@ ReportForm::ReportForm(QWidget *parent):
     ui->miningAreaBox->addItems(miningAreaMap.keys());
     miningAreaValue = miningAreaMap.value(ui->miningAreaBox->currentText());
 
+    miningAreaLocation = MiningAreaLocation::getMiningAreaLocationConfigure(ui->miningAreaBox->currentText());
+
     ui->startDate->setMinimumDate(QDate::currentDate().addDays(-3650));   // -3650天
     ui->startDate->setCalendarPopup(true);                                // 日历弹出
     ui->endDate->setMaximumDate(QDate::currentDate().addDays(3650));      // +3650天
@@ -69,6 +71,7 @@ ReportForm::ReportForm(QWidget *parent):
     connect(ui->csvList,SIGNAL(itemClicked(QTableWidgetItem*)),this, SLOT(getSingleClickedItem(QTableWidgetItem*)));
     connect(ui->miningAreaBox, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
           [=](const QString &text){
+        miningAreaLocation = MiningAreaLocation::getMiningAreaLocationConfigure(text);
         miningAreaValue = miningAreaMap.value(text);
         ui->axWidget->dynamicCall("DoCommand(const qint32&)",1);
     });
@@ -99,7 +102,7 @@ void ReportForm::initZCharts()
         splineSeries[i].setPointsVisible(true);
         lineSeries[i].setColor(QColor(255,0,0));
         lineSeries[i].setPointLabelsVisible(true);
-        lineSeries[i].setPointLabelsFormat("(@xPoint, @yPoint)");
+        lineSeries[i].setPointLabelsFormat("(@xPoint)");
         chart[i].legend()->hide();
         chart[i].addSeries(&splineSeries[i]);              //为图表添加曲线序列
         chart[i].addSeries(&lineSeries[i]);                //为图标添加折线序列
@@ -234,38 +237,12 @@ bool ReportForm::readCSVFileOfZ(QString fileName)
     //panfu是按照到时顺序来的
     for(int i=0;i<sennumInRealCSV;i++){
         if(i<sennum){
-            ch = panfu.at(i);
-            if(ch == 'r'){
-                senChannelNum[i] = R;
-            }
-            if(ch == 's'){
-                senChannelNum[i] = S;
-            }
-            if(ch == 't'){
-                senChannelNum[i] = T;
-            }
-            if(ch == 'u'){
-                senChannelNum[i] = U;
-            }
-            if(ch == 'v'){
-                senChannelNum[i] = V;
-            }
-            if(ch == 'w'){
-                senChannelNum[i] = W;
-            }
-            if(ch == 'x'){
-                senChannelNum[i] = X;
-            }
-            if(ch == 'y'){
-                senChannelNum[i] = Y;
-            }
-            if(ch == 'z'){
-                senChannelNum[i] = Z;
-            }
+            ch = panfu.at(i).toUpper();
+            senChannelNum[i] = miningAreaLocation.value(QString(ch));
         }
         else{
             //ch = panfuInRealCSV.at(i);
-            senChannelNum[i] = Undefined;
+            senChannelNum[i] = miningAreaLocation.value("Undefined");
         }
     }
 
@@ -306,7 +283,7 @@ bool ReportForm::readCSVFileOfZ(QString fileName)
     qDebug()<<"parsing the csv file completed";
 
 
-
+    maxValueOfZChannel = 0;
     for(int i=0;i<(count-1);i++){
         item = line.at(i).split(',');
         if(0 == i%10){                                    //采样，只取十分之一的数据
@@ -330,8 +307,8 @@ bool ReportForm::readCSVFileOfZ(QString fileName)
     qDebug()<<"read csv file successfully!";
 
     //若maxValueOfZChannel存在极端值，取最大值50000
-    if(maxValueOfZChannel >= 50000){
-        maxValueOfZChannel = 50000;
+    if(maxValueOfZChannel >= 40000){
+        maxValueOfZChannel = 40000;
     }
     for(int i=0;i<9;i++){
         axisY[i].setRange(-maxValueOfZChannel, maxValueOfZChannel);   //设置坐标轴范围
@@ -603,11 +580,13 @@ void ReportForm::queryButtonClicked()
      //query.next()指向查找到的第一条记录，然后每次后移一条记录
      while(query.next())
      {
+         kind = query.value(1).toString();
+         if(kind!="PSO")
+             continue;
+         dataParameters.append(kind);
+
          quackTime = query.value(0).toString();
          dataParameters.append(quackTime);
-
-         kind = query.value(1).toString();
-         dataParameters.append(kind);
 
          xData = query.value(2).toDouble();
          dataParameters.append(xData);
@@ -840,14 +819,24 @@ void ReportForm::generateWebDOCClicked()
     QString html;
     //html += "<html xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:w=\"urn:schemas-microsoft-com:office:word\" xmlns=\"http://www.w3.org/TR/REC-html40\"><head><meta http-equiv=Content-Type  content=\"text/html; charset=gb2312\" >"; //这句可加可不加。主要是因为我在word里把doc另存为html文件后，看到有这么个头标签，由此想到直接将html文档保存为doc文件。
 
+    QString name;
+    if(QString::compare(ui->miningAreaBox->currentText(),"hongyang",Qt::CaseInsensitive)==0){
+        name = "红阳三矿";
+    }else if(QString::compare(ui->miningAreaBox->currentText(),"pingdingshan",Qt::CaseInsensitive)==0){
+        name = "平顶山";
+    }else if(QString::compare(ui->miningAreaBox->currentText(),"shuangyashan",Qt::CaseInsensitive)==0){
+        name = "双鸭山";
+    }else{
+        name="";
+    }
     //如果查询日期为一天那么标题中只写当天日期，否则标题中写起始和结束日期
     if(startDate.compare(endDate)==0){
         html +="<h3 align=\"center\"><font face=\"宋体\" > ";
-        html += "红阳三矿"+startDate;
+        html += name+startDate;
         html += "矿震数据初步分析</font></h3>";
     }else{
         html += "<h3 align=\"center\"><font face=\"宋体\" >";
-        html += "红阳三矿"+startDate+"到"+endDate;
+        html += name+startDate+"到"+endDate;
         html += "矿震数据初步分析</font></h3> ";
     }
 
@@ -888,7 +877,7 @@ void ReportForm::generateWebDOCClicked()
             if(compareFile != wenjianming){
                 compareFile = wenjianming;
                 html += "<p style=\"font-size:10;\"><b>事件";
-                html += QString::number(i+1)+":"+quackTime;
+                html += QString::number(i+1)+":"+quackTime+"s";
                 html += " 分析结果如下：";
                 html += "</b></p>";
                 i++;
@@ -912,7 +901,7 @@ void ReportForm::generateWebDOCClicked()
                 if(ch == 'r'){
                     //判断最早到时是哪个台站，因为panfu是按照到时顺序来的，所以索引为0的为最早到时
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -921,7 +910,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 's'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -930,7 +919,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 't'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -939,7 +928,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 'u'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -948,7 +937,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 'v'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -957,7 +946,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 'w'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -966,7 +955,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 'x'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -975,7 +964,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 'y'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -984,7 +973,7 @@ void ReportForm::generateWebDOCClicked()
                 }
                 if(ch == 'z'){
                     if(0 == i){
-                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0);
+                        html +=  wenjianmingDate.at(1)+wenjianmingDate.at(2).split(".").at(0)+"s";
                         html +=  "</p>";
                     }
 //                    html += "<p style=\"font-size:10;\">  " ;
@@ -1001,13 +990,13 @@ void ReportForm::generateWebDOCClicked()
             html +=  QString::number(zData,'g',13);
             html +=  "</p>";
             html += "<p style=\"font-size:10;\">  P波到时：" ;
-            html +=  QString::number(Parrival,'g',13);
+            html +=  QString::number(Parrival,'g',13)+"s";
             html +=  "</p>";
             html += "<p style=\"font-size:10;color:#FF0000\">  震级：" ;
             html +=  QString::number(quackGrade);
             html +=  "</p>";
             html += "<p style=\"font-size:10;color:#FF0000\">  能量：" ;
-            html +=  QString::number(nengliang);
+            html +=  QString::number(nengliang)+"J";
             html +=  "</p>";
             html += "<p style=\"font-size:10;\">  发震时刻：" ;
             html +=  quackTime;
