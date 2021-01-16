@@ -13,6 +13,7 @@ ReportForm::ReportForm(QWidget *parent):
     pointId = new QQueue<qlonglong>();
 
     if(DataBaseConfigure::getDataBaseConfigure()){
+        datatable = DataBaseConfigure::table;
         db = new ConnectDataBase;
     }
 
@@ -552,7 +553,7 @@ void ReportForm::queryButtonClicked()
 
      //以下执行相关sql语句
      QSqlQuery query;
-     QString sql = "select quackTime,kind,xData,yData,zData,quackGrade,Parrival,panfu,nengliang,wenjianming from mine_quack_results where quackTime>='"+
+     QString sql = "select quackTime,kind,xData,yData,zData,quackGrade,Parrival,panfu,nengliang,wenjianming from  "+datatable+"  where quackTime>='"+
              startDate+" 00:00:00' and quackTime<='"+endDate+" 23:59:59' ";
      query.exec(sql);            // 执行查询操作
 

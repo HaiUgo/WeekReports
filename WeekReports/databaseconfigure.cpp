@@ -15,6 +15,8 @@ QString DataBaseConfigure::userName = "";
 
 QString DataBaseConfigure::password = "";
 
+QString DataBaseConfigure::table = "";
+
 bool DataBaseConfigure::getDataBaseConfigure()
 {
     QString path = QDir::currentPath();
@@ -56,6 +58,8 @@ bool DataBaseConfigure::getDataBaseConfigure()
     if (jsonObject.contains(QStringLiteral("Password"))){
         password = jsonObject["Password"].toString();
     }
-
+    if (jsonObject.contains(QStringLiteral("Table"))){
+        table = jsonObject["Table"].toString();
+    }
     return true;
 }

@@ -26,7 +26,7 @@ public:
     //static QString eventTable;
     static QString userName;
     static QString password;
-
+    static QString table;
     static bool getDataBaseConfigure();
 };
 
