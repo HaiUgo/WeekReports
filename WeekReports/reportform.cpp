@@ -862,8 +862,8 @@ void ReportForm::generateWebDOCClicked()
         QList<QList<QVariant>> valueList = mapParameter.values(singleKey);
         // qDebug()<<"valueList.size():"<<valueList.size();
         for(QList<QVariant> temp:valueList){
-            quackTime = temp.at(0).toString();
-            kind = temp.at(1).toString();
+            kind = temp.at(0).toString();
+            quackTime = temp.at(1).toString();
             xData = temp.at(2).toDouble();
             yData = temp.at(3).toDouble();
             zData = temp.at(4).toDouble();
@@ -878,7 +878,7 @@ void ReportForm::generateWebDOCClicked()
             if(compareFile != wenjianming){
                 compareFile = wenjianming;
                 html += "<p style=\"font-size:10;\"><b>事件";
-                html += QString::number(i+1)+":"+quackTime+"s";
+                html += QString::number(i+1)+":"+quackTime;
                 html += " 分析结果如下：";
                 html += "</b></p>";
                 i++;
